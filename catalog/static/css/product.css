@@ -1,0 +1,87 @@
+body {
+	grid-template-columns: 1fr;
+}
+
+section{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+	grid-gap: 20px;
+}
+
+#gallery img{
+	border-radius: 5px;
+}
+
+#gallery>img{
+    max-width:100%;
+}
+
+#thumbnails{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(40px,1fr));
+	grid-gap: 5px;
+}
+
+#thumbnails>img{
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+
+#description{
+		border-top: 2px dashed pink;
+}
+
+label span{
+	float: right;
+	color: gray;
+}
+
+#items h1{
+	margin: 0;
+}
+
+/* forms */
+
+#buy{
+	border:0;
+	background-color: #9d93dd;
+	color: white;
+	border-radius: 3px;
+	padding: 0.5em;
+}
+
+.collapsible{
+	display:none;
+}
+
+form{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+	grid-gap: 5px;
+}
+
+#collapse{
+    border-radius: 0;
+	border-width: 1px 0 1px;
+	border-color: black;
+	background-color:transparent;
+	text-align: left;
+	padding: 10px;
+	color: black;
+}
+
+#collapse:after{
+  content: '+';
+  float: right;
+}
+
+.active:after{
+  content: '-';
+  float: right;
+}
+
+#flash>span{
+    color: red;
+}
+

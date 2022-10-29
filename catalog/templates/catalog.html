@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block head %}
+	<link rel="stylesheet" href="{{ url_for('.static', filename='css/catalog.css') }}">
+	<title>Каталог</title>
+{% endblock %}
+
+{% block body %}
+	{% for record in records %}
+		<article>
+			<a href="{{ record.slug }}">
+				<img class="article-img" src="{{ url_for('.static', filename='pics/' + record.thumbnail) }}" alt=" " />
+				{% if record.price %}
+				<div class="price">{{ record.price }} ₽</div>
+				{% endif %}
+				{{ record.name }}
+			</a>
+		</article>
+	{% endfor %}
+{% endblock %}

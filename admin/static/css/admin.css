@@ -1,0 +1,38 @@
+form{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+	grid-gap: 5px;
+}
+
+input, textarea{
+	width:80%;
+}
+
+fieldset:nth-child(2) input[type=text] {
+	width: 65%;
+}
+
+fieldset:nth-child(2) input[type=number] {
+	width: 20%;
+	margin: 0 0 0 5px;
+}
+
+.flash{
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.flash.success {
+    border: 2px dashed #3c763d;
+    background-color: #d6e9c6;
+}
+
+.flash.bad {
+    border: 2px dashed #f52222;
+    background-color: #f0c9c9;
+}
+
+.order{
+    display:grid;
+}
+

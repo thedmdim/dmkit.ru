@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('.static', filename='css/orders.css') }}">
+<script src="{{ url_for('.static', filename='js/orders.js') }}" defer></script>
+<title>Заказы</title>
+{% endblock %}
+
+{% block body %}
+<nav><a id="back" href=""><<</a><label><input id="payment" type="checkbox" onclick="setPaid();location.reload();return false;">Только оплаченные</label><a id="forward" href="">>></a></nav>
+    {% for order in orders %}
+        <article>
+            <div class="id" {% if order.status == 'succeeded' %} style="background-color: green;" {% else %} style="background-color: red;" {% endif %}>ID {{ order.id }} {{ order.status }}</div><div class="name">{{ order.name }} {{ order.surname }} {{ order.patronymic }}</div><div class="timestamp">{{ order.timestamp | date }}</div>
+            <div class="number">{{ order.number }}</div>
+            <div class="passport">Паспорт {{ order.passport1 }} {{ order.passport2 }}</div>
+            <div class="address">{{ order.city }}<br>{{ order.address }}</div>
+            <div class="product">{{ order.product_name }}</div>
+            {% for item in order["items"] %}
+                <div class="items">{{ item.name }}  <span>{{ item.price }} RUB</span></div>
+            {% endfor %}
+            <div class="total">ИТОГО {{ order.price }}</div>
+        </article>
+    {% endfor %}
+{% endblock %}

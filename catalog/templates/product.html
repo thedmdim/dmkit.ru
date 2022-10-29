@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block head %}
+	<title>{{ product.name }}</title>
+	<link rel="stylesheet" href="{{ url_for('.static', filename='css/product.css') }}">
+	<script src="{{ url_for('.static', filename='js/product.js') }}" defer></script>
+	<noscript><style>.collapsible{display:grid}</style></noscript>
+{% endblock %}
+
+{% block body %}
+	<section>
+		<article id="gallery">
+			<img src="{{ url_for('.static', filename='pics/' + product.gallery[0]) }}"/>
+			<div id="thumbnails">
+			{% for filename in product.gallery %}
+				<img src="{{ url_for('.static', filename='pics/' + filename) }}"/>
+			{% endfor %}
+			</div>
+		</article>
+		<article id="items">
+			<h1>{{ product.name }}</h1>
+			{% for item in product['items'] %}
+				<p><label>
+					<input form="order" type="checkbox" name="{{ item.id }}" cost="{{ item.price }}" {% if item.checked %} checked {% endif %}>{{ item.name }}
+					<span>{{ item.price }} RUB</span>
+				</label></p>
+			{% endfor %}
+			<p id="price">0</p>
+			<button class="button" onclick="collapse();view();">Купить</button>
+		</article>
+	</section>
+
+	<article id="description">
+		<p>{{ product.desc }}</p>
+	</article>
+
+	{% for msg in get_flashed_messages() %}
+	<p id="flash"><span>*</span>{{ msg }}</p>
+	{% endfor  %}
+
+	<button id="collapse" onclick="collapse();this.classList.toggle('active');">Оформить заказ</button>
+
+	<form class="collapsible" id="order" action="/order" method="post">
+		<fieldset>
+			<legend>ФИО</legend><input type="hidden" name="id" value="{{ product.id }}">
+			<p><input type="text" name="name" placeholder="Фамилия"></p>
+			<p><input type="text" name="surname" placeholder="Имя"></p>
+			<p><input type="text" name="patronymic"placeholder="Отчество"></p>
+		</fieldset>
+		<fieldset>
+			<legend>Контакты</legend>
+			<p><input type="text" name="city" placeholder="Город"></p>
+			<p><input type="text" name="address" placeholder="Улица, Дом, Кв"></p>
+			<p><input type="tel" name="tel" placeholder="Телефон"></p>
+		</fieldset>
+		<fieldset>
+			<legend>Паспорт</legend>
+			<p><input type="text" name="passport1" size="4" placeholder="Серия"></p>
+			<p><input type="text" name="passport2" size="6" placeholder="Номер"></p>
+		</fieldset>
+	</form>
+	<button form="order" class="collapsible submit" type="submit">Оплатить</button>
+{% endblock %}

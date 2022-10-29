@@ -1,0 +1,73 @@
+body {
+    display:grid;
+    grid-template-columns: 4fr 1fr;
+    max-width: 1200px;
+}
+
+#product {
+    display:grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 10px;
+}
+
+fieldset {
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: min-content;
+    grid-gap: 10px;
+}
+
+.itemName{
+    width: 100%;
+}
+
+#submit{
+    background-color:green;
+    grid-column: 1 / -1;
+}
+
+
+
+img {
+    display: block;
+    max-width: 100%;
+}
+.preview {
+    overflow: hidden;
+    width: 160px;
+    height: 160px;
+    margin: 10px;
+    border: 1px solid red;
+}
+
+
+
+#cropper-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+	background-color: white;
+	grid-template-columns: auto 150px;
+	justify-items: center;
+	min-height: 300px;
+	width: 50%;
+	border: 2px solid black;
+	gap: 10px;
+	padding: 10px;
+}
+
+#image {
+    display:block;
+	max-width: 100%;
+	object-fit: contain;
+}
+
+#preview {
+	width: 150px;
+	height: 150px;
+	overflow: hidden;
+	border-radius: 5px;
+}

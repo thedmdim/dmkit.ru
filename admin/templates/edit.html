@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Edit products</title>
+<link rel="stylesheet" href="{{ url_for('.static', filename='css/edit.css') }}">
+<script src="{{ url_for('.static', filename='js/edit.js') }}" defer></script>
+<link rel="stylesheet" href="{{ url_for('.static', filename='css/cropper.min.css') }}">
+<script src="{{ url_for('.static', filename='js/cropper.min.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+
+<!-- master item -->
+<div id="master-item" style="display:none;">
+    <div class="item">
+        <input type="text" name="name" placeholder="Название">
+        <input type="text" name="price" placeholder="Цена">
+        <select name="type">
+            {% for type in types %}
+                <option value="{{ type.id }}">{{ type.name }}</option>
+            {% endfor %}
+        </select>
+        <button onclick="deleteItem(this)">Удалить</button>
+    </div>
+</div>
+
+<!-- master photo -->
+<div id="master-photo" style="display:none;">
+    <div class="photo">
+        <img src="">
+    </div>
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+
+<form id="create-or-edit">
+    <select onchange="loadProduct(this)">
+        <option value="">Новый товар</option>
+        {% for product in products %}
+            <option value="{{ product.id }}">{{ product.name }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+<form id="info">
+    <input name="id" hidden>
+
+    <label for="name">Название</label>
+    <input name="name">
+
+    <label for="slug">slug</label>
+    <input name="slug">
+
+    <label for="desc">Описание</label>
+    <textarea name="desc" rows="7"></textarea>
+
+    <label for="model_id">Moдель авто</label>
+    <select name="model_id">
+        {% for model in models %}
+            <option value="{{ model.id }}">{{ model.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="manufacturer_id">Производители</label>
+    <select name="manufacturer_id">
+        {% for manufacturer in manufacturers %}
+            <option value="{{ manufacturer.id }}">{{ manufacturer.name }}</option>
+        {% endfor %}
+    </select>
+
+    <input name="thumbnail" type="file" hidden>
+</form>
+
+<form id="images">
+    <div>
+        <label><input id="img" type="file" onchange="crop()"> Значок 1x1</label>
+        <div id="cropper-box" style="display:none;">
+            <div id="image-container">
+                <img id="image">
+            </div>
+            <article id="preview"></article>
+            <button type="button" onclick="getCropped()" >Обрезать</button>
+        </div>
+        <img id="thumbnail" src="{{ url_for('catalog.static', filename='pics/placeholder.png') }}">
+    </div>
+
+    <div id="gallery">
+        <label><input name="gallery" type="file" onchange="previewPhotos(this)" multiple> Галерея</label>
+        <div id="gallery-container"></div>
+    </div>
+</form>
+
+<form id="items">
+    <div id="items-container"></div>
+    <button onclick="addEmptyItem()" type="button">Добавить деталь</button>
+</form>
+
+<button class="submit" onclick="sendProduct()">Отправить</button>
+{% endblock %}

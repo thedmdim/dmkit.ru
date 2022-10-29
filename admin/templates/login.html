@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block head %}
+	<link rel="stylesheet" href="{{ url_for('.static', filename='css/admin_login.css') }}">
+	<title>Войти</title>
+{% endblock %}
+
+{% block body %}
+    <fieldset>
+        <legend>Войти</legend>
+        <form action = "" method = "post">
+            <p><input type="text" name="username"></p>
+            <p><input type="password" name="password"/></p>
+            <p><input type="submit"></p>
+        </form>
+    </fieldset>
+{% endblock %}

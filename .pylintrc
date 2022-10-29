@@ -1,0 +1,18 @@
+[MASTER]
+# F0010: parse-error
+# E0401: import-error
+# W0107: unnecessary-pass
+# W0703: broad-except
+# C0103: invalid-name
+# C0114: missing-module-docstring
+# R0913: too-many-arguments
+# C0301: line-too-long
+# C0410: multiple-imports
+# C0303: trailing-whitespace
+# R1710: inconsistent-return-statements
+disable=F0010, E0401, W0107, W0703, C0103, C0114, R0913, C0301, C0410, C0303, R1710
+ignore=venv
+[DESIGN]
+min-public-methods=0
+[FORMAT]
+max-line-length=120

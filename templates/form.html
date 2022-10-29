@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Загрузка изображерий</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+	<p>Gallery</p>
+	<form id="gal" action="/api/products/1/thumbnail" method="post" enctype=multipart/form-data>
+		<input name="thumbnail" type="file">
+		<input type="submit">
+	</form>
+</body>
+
+</html>

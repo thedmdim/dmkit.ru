@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Заказ</title>
+	<link rel="stylesheet" href="{{ url_for('.static', filename='css/order.css') }}">
+{% endblock %}
+
+{% block body %}
+<div>
+    <h2>Заказ #{{ order.id }}</h2>
+
+    {% if order.status == 'succeeded' %}
+        <p>Статус: Оплачено</p>
+        <p><i>Мы получили деньги, ваш заказ готовится</i></p>
+    {% else %}
+        <p>Статус: Ожидаем оплату</p>
+        <p><i>Деньги скоро придут, обновите странцу</i></p>
+    {% endif %}
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+.idea
+venv/
+
+__pycache__/
+*/__pycache__/
+
+/catalog/static/pics/*
+
+server.db
+
+settings.json

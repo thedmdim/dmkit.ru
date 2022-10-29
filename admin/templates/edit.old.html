@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Edit products</title>
+<link rel="stylesheet" href="{{ url_for('.static', filename='css/edit.css') }}">
+<script src="{{ url_for('.static', filename='js/edit.js') }}" defer></script>
+<link rel="stylesheet" href="{{ url_for('.static', filename='css/cropper.min.css') }}">
+<script src="{{ url_for('.static', filename='js/cropper.min.js') }}" defer></script>
+{% endblock %}
+
+{% block body %}
+<!-- application/json -->
+<form id="product" action="/api/products/">
+    <div>
+        <fieldset>
+            <legend>Товары</legend>
+            <select name="id" size="20">
+                <option value="">Новый продукт</option>
+            {% for product in products %}
+                <option value="{{ product.id }}">{{ product.name }}</option>
+            {% endfor %}
+            </select>
+        </fieldset>
+    </div>
+    <div>
+        <fieldset>
+            <legend>Товар</legend>
+            <label><input name="name"> Название</label>
+            <label><input name="slug"> slug</label>
+            <label><textarea name="desc" rows="7"></textarea> Описание</label>
+            <label>
+                <select name="model_id">
+                    {% for model in models %}
+                        <option value="{{ model.id }}">{{ model.name }}</option>
+                    {% endfor %}
+                </select>
+                Moдель авто
+            </label>
+            <label>
+                <select name="manufacturer_id">
+                    {% for manufacturer in manufacturers %}
+                        <option value="{{ manufacturer.id }}">{{ manufacturer.name }}</option>
+                    {% endfor %}
+                </select>
+                Производители
+            </label>
+        </fieldset>
+
+        <fieldset name="items">
+            <legend>Детали</legend>
+            <button onclick="createItem()" type="button">Добавить деталь</button>
+        </fieldset>
+    </div>
+</form>
+<!-- multipart/form-data -->
+<form id="images" action="/api/images/" method="post">
+    <fieldset name="images">
+        <legend>Картинки</legend>
+
+        <label><input id="img" type="file" onchange="crop()"> Значок 1x1</label>
+        <div id="cropper-box" style="display:none;">
+            <div id="image-container">
+                <img id="image">
+            </div>
+            <article id="preview"></article>
+            <button type="button" onclick="getCropped()" >Обрезать</button>
+        </div>
+
+        <label><input name="gallery" type="file" multiple> Галерея</label>
+    </fieldset>
+</form>
+<button id="submit" onclick="submit()">Запись</button>
+{% endblock %}
