@@ -1,5 +1,4 @@
 import os.path, sqlite3, json
-from turtle import sety
 from flask import Flask, render_template, g
 from datetime import datetime
 
