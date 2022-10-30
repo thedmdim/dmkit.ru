@@ -48,7 +48,7 @@ def index(brand=None, model=None, product=None, _type=None):
         GROUP BY t.id
         '''
 
-        data = dict(execq(query, (_type, _type, product, model, brand)))
+        data = dict(execq(query, (_type, _type, product, model, brand))[0])
 
 
         items_ids = data.pop("items_ids")
@@ -102,7 +102,7 @@ def index(brand=None, model=None, product=None, _type=None):
         	SELECT * FROM items 
         		JOIN products ON products.id = items.product_id 
         		JOIN models ON products.model_id = models.id 
-        		WHERE models.slug = '?'
+        		WHERE models.slug = ?
         		GROUP BY products.id 
         		HAVING count(items.id) > 1
         	)
@@ -111,17 +111,16 @@ def index(brand=None, model=None, product=None, _type=None):
         		JOIN products ON products.id = items.product_id 
         		JOIN types ON items.type_id = types.id 
         		JOIN models ON products.model_id = models.id 
-        		WHERE models.slug = '?' ORDER BY id
+        		WHERE models.slug = ? ORDER BY id
         );
         '''
         data = execq(query, (model, model))
         return render_template("catalog.html", records=data)
-    
     if brand:
         query = """
         SELECT models.slug, models.name, models.thumbnail FROM models
         JOIN brands ON brands.id = models.brand_id
-        WHERE brands.slug = '?';
+        WHERE brands.slug = ?
         """
         data = execq(query, (brand,))
         return render_template("catalog.html", records=data)

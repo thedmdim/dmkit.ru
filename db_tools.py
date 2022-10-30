@@ -70,7 +70,7 @@ def execq(query: str, data: Union[tuple, list] = None) -> Union[tuple, list]:
     cur = db.cursor()
 
     if isinstance(data, tuple):
-        res = cur.execute(query, data).fetchone()
+        res = cur.execute(query, data).fetchall()
     elif isinstance(data, list):
         res = cur.executemany(query, data).fetchall()
     else:
