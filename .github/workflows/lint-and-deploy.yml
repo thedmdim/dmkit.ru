@@ -37,6 +37,6 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         script: |
-        cd dmkit.ru
-        git pull
-        echo 'restart' >> tmp/restart.txt
+          cd dmkit.ru
+          git pull
+          echo 'restart' >> tmp/restart.txt
