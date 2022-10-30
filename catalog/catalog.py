@@ -121,7 +121,7 @@ def index(brand=None, model=None, product=None, _type=None):
         query = """
         SELECT models.slug, models.name, models.thumbnail FROM models
         JOIN brands ON brands.id = models.brand_id
-        WHERE brands.slug = '?'
+        WHERE brands.slug = '?';
         """
         data = execq(query, (brand,))
         return render_template("catalog.html", records=data)
